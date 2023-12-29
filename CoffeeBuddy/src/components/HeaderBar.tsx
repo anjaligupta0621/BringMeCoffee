@@ -1,16 +1,13 @@
 /* eslint-disable prettier/prettier */
+
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const PaymentScreen = () => {
+export default function HeaderBar() {
+
     return (
         <View>
-            <Text>PaymentScreen</Text>
+            <Text> HeaderBar </Text>
         </View>
     );
-};
-
-
-
-
-export default PaymentScreen;
+}
