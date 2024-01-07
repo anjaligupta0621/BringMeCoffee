@@ -114,15 +114,15 @@ const HomeScreen = () => {
                         return <TouchableOpacity>
                             <CoffeeCard
                                 name={item.name}
-                                id={ }
-                                index={ }
-                                type={ }
-                                roasted={ }
-                                imagelink_square={ }
-                                special_ingredient={ }
-                                average_rating={ }
-                                price={ }
-                                buttonPressHandler={ }
+                                id={item.id}
+                                index={item.index}
+                                type={item.type}
+                                roasted={item.roasted}
+                                imagelink_square={item.imagelink_square}
+                                special_ingredient={item.special_ingredient}
+                                average_rating={item.average_rating}
+                                price={item.prices[2]}
+                                buttonPressHandler={() => { }}
                             />
                         </TouchableOpacity>
                     }}
