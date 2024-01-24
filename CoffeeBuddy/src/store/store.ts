@@ -61,6 +61,59 @@ export const useStore = create(
                 state.CartPrice = totalPrice.toFixed(2).toString();
             })),
 
+            addToFavoriteList: (type: string, id: string) => set(produce(state => {
+                if (type === 'Coffee') {
+                    for (let i = 0; i < state.CoffeeList.length; i++) {
+                        if (state.CoffeeList[i].id == id) {
+                            if (state.CoffeeList[i].favorite === false) {
+                                state.CoffeeList[i].favorite = true;
+                                state.FavoritesList.unshift(state.CoffeeList[i]);
+                            }
+                            break;
+                        }
+                    }
+                } else if (type === 'Bean') {
+                    for (let i = 0; i < state.BeanList.length; i++) {
+                        if (state.BeanList[i].id === id) {
+                            if (state.BeanList[i].favorite === false) {
+                                state.BeanList[i].favorite = true;
+                                state.FavoritesList.unshift(state.BeanList[i]);
+                            }
+                            break;
+                        }
+                    }
+                }
+            })),
+
+            deleteFromFavoriteList: (type: string, id: string) => set(produce(state => {
+                if (type === 'Coffee') {
+                    for (let i = 0; i < state.CoffeeList.length; i++) {
+                        if (state.CoffeeList[i].id == id) {
+                            if (state.CoffeeList[i].favorite === true) {
+                                state.CoffeeList[i].favorite = false;
+                            }
+                            break;
+                        }
+                    }
+                } else if (type === 'Bean') {
+                    for (let i = 0; i < state.BeanList.length; i++) {
+                        if (state.BeanList[i].id == id) {
+                            if (state.BeanList[i].favorite === true) {
+                                state.BeanList[i].favorite = false;
+                            }
+                            break;
+                        }
+                    }
+                }
+                let spliceIndex = -1;
+                for (let i = 0; i < state.FavoritesList.length; i++) {
+                    if (state.FavoritesList[i].id === id) {
+                        spliceIndex = i;
+                        break;
+                    }
+                }
+                state.FavoritesList.splice(spliceIndex, 1);
+            })),
         }), { name: 'coffee-app', storage: createJSONStorage(() => AsyncStorage) }
     )
 )
