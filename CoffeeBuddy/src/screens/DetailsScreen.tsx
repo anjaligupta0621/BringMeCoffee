@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { useStore } from '../store/store';
 import { COLORS } from '../theme/theme';
 import ImageBackgroundInfo from '../components/ImageBackgroundInfo';
@@ -9,6 +9,18 @@ const DetailsScreen = ({ navigation, route }: any) => {
     const ItemOfIndex = useStore((state: any) =>
         route.params.type === 'Coffee' ? state.CoffeeList : state.BeanList
     )[route.params.index];
+
+    const addToFavoriteList = useStore((state: any) => state.addToFavoriteList);
+    const deleteFromFavoriteList = useStore((state: any) => state.deleteFromFavoriteList);
+
+    const ToggleFavorite = (favourite: boolean, type: string, id: string) => {
+        favourite ? deleteFromFavoriteList(type, id) : addToFavoriteList(type, id);
+    };
+
+    const BackHandler = () => {
+        navigation.pop();
+    };
+
     return (
         <View style={styles.ScreenContainer}>
             <StatusBar backgroundColor={COLORS.primaryBlackHex} />
@@ -21,15 +33,15 @@ const DetailsScreen = ({ navigation, route }: any) => {
                     imagelink_portrait={ItemOfIndex.imagelink_portrait}
                     type={ItemOfIndex.type}
                     id={ItemOfIndex.id}
-                    favorite={ItemOfIndex.favorite}
+                    favourite={ItemOfIndex.favourite}
                     name={ItemOfIndex.name}
                     special_ingredient={ItemOfIndex.special_ingredient}
                     ingredients={ItemOfIndex.ingredients}
                     average_rating={ItemOfIndex.average_rating}
                     ratings_count={ItemOfIndex.ratings_count}
                     roasted={ItemOfIndex.roasted}
-                    BackHandler={() => { }}
-                    ToggleFavorite={() => { }}
+                    BackHandler={BackHandler}
+                    ToggleFavorite={ToggleFavorite}
                 />
             </ScrollView>
         </View>
