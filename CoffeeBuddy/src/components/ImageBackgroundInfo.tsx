@@ -70,7 +70,7 @@ const ImageBackgroundInfo = (props: ImageBackgroundInfoProps) => {
                                         size={FONTSIZE.size_16}
                                         color={COLORS.primaryOrangeHex}
                                     />
-                                    <Text style={styles.PropertyTextFirst}>
+                                    <Text style={styles.PropertyTextLast}>
                                         {props.ingredients}
                                     </Text>
                                 </View>
@@ -78,7 +78,18 @@ const ImageBackgroundInfo = (props: ImageBackgroundInfoProps) => {
                         </View>
                         <View style={styles.InfoContainerRow}>
                             <View style={styles.RatingContainer}>
-
+                                <CustomIcon
+                                    name={'star'}
+                                    color={COLORS.primaryOrangeHex}
+                                    size={FONTSIZE.size_20}
+                                />
+                                <Text style={styles.RatingText}>{props.average_rating}</Text>
+                                <Text style={styles.RatingCountText}>({props.ratings_count})</Text>
+                            </View>
+                            <View style={styles.RoastedContainer}>
+                                <Text style={styles.RoastedText}>
+                                    {props.roasted}
+                                </Text>
                             </View>
                         </View>
                     </View>
@@ -150,7 +161,40 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.size_10,
         color: COLORS.primaryWhiteHex,
     },
-    RatingContainer: {},
+    PropertyTextLast: {
+        fontFamily: FONTFAMILY.poppins_medium,
+        fontSize: FONTSIZE.size_10,
+        color: COLORS.primaryWhiteHex,
+        marginTop: SPACING.space_2 + SPACING.space_4,
+    },
+    RatingContainer: {
+        flexDirection: 'row',
+        gap: SPACING.space_10,
+        alignItems: 'center',
+    },
+    RatingText: {
+        fontFamily: FONTFAMILY.poppins_semibold,
+        fontSize: FONTSIZE.size_18,
+        color: COLORS.primaryWhiteHex,
+    },
+    RatingCountText: {
+        fontFamily: FONTFAMILY.poppins_regular,
+        fontSize: FONTSIZE.size_12,
+        color: COLORS.primaryWhiteHex,
+    },
+    RoastedContainer: {
+        height: 55,
+        width: 55 * 2 + SPACING.space_20,
+        borderRadius: BORDERRADIUS.radius_15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: COLORS.primaryBlackHex,
+    },
+    RoastedText: {
+        fontFamily: FONTFAMILY.poppins_regular,
+        fontSize: FONTSIZE.size_10,
+        color: COLORS.primaryWhiteHex,
+    },
 
 });
 
