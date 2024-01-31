@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { SPACING } from '../theme/theme';
+import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/theme';
 
 interface PriceProps {
     price: string;
@@ -26,7 +26,7 @@ const PaymentFooter: React.FC<PaymentFooterProps> = ({ price, buttonPressHandler
                     </Text>
                 </Text>
             </View>
-            <TouchableOpacity style={styles.PayButton}>
+            <TouchableOpacity style={styles.PayButton} onPress={() => buttonPressHandler()}>
                 <Text style={styles.ButtonText}>{buttonTitle}</Text>
             </TouchableOpacity>
         </View>
@@ -42,12 +42,37 @@ const styles = StyleSheet.create({
         gap: SPACING.space_20,
         padding: SPACING.space_20,
     },
-    PriceContainer: {},
-    PriceTitle: {},
-    PriceText: {},
-    Price: {},
-    PayButton: {},
-    ButtonText: {},
+    PriceContainer: {
+        alignItems: 'center',
+        width: 100,
+    },
+    PriceTitle: {
+        fontFamily: FONTFAMILY.poppins_medium,
+        fontSize: FONTSIZE.size_14,
+        color: COLORS.secondaryLightGreyHex,
+    },
+    PriceText: {
+        fontFamily: FONTFAMILY.poppins_semibold,
+        fontSize: FONTSIZE.size_24,
+        color: COLORS.primaryOrangeHex,
+    },
+    Price: {
+        color: COLORS.primaryWhiteHex,
+    },
+    PayButton: {
+        backgroundColor: COLORS.primaryOrangeHex,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: SPACING.space_36 * 2,
+        borderRadius: BORDERRADIUS.radius_20,
+
+    },
+    ButtonText: {
+        fontFamily: FONTFAMILY.poppins_semibold,
+        fontSize: FONTSIZE.size_18,
+        color: COLORS.primaryWhiteHex,
+    },
 });
 
 export default PaymentFooter;
