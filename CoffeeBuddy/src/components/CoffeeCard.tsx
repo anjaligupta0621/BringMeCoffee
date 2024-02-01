@@ -58,7 +58,18 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
                     <Text style={styles.CardPrice}> {price.price} </Text>
                 </Text>
             </View>
-            <TouchableOpacity onPress={() => { }}>
+            <TouchableOpacity onPress={() => {
+                buttonPressHandler({
+                    id,
+                    index,
+                    type,
+                    roasted,
+                    imagelink_square,
+                    name,
+                    special_ingredient,
+                    prices: [{ ...price, quantity: 1 }],
+                });
+            }}>
                 <BGIcon
                     color={COLORS.primaryWhiteHex}
                     name={'add'}
