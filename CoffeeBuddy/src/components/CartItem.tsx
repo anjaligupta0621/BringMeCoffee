@@ -124,7 +124,44 @@ const CartItem: React.FC<CartItemProps> = ({
                                 {prices[0].size}
                             </Text>
                         </View>
+                        <Text style={styles.SizeCurrency}>
+                            {prices[0].currency}
+                            <Text style={styles.SizePrice}>
+                                {prices[0].price}
+                            </Text>
+                        </Text>
                     </View>
+                    <View style={styles.CartItemSingleQuantityContainer}>
+                <TouchableOpacity
+                    style={styles.CartItemIcon}
+                    onPress={() => {
+                        decrementCartItemQuantityHandler(id, prices[0].size);
+                    }}
+                >
+                    <CustomIcon
+                        name="minus"
+                        color={COLORS.primaryWhiteHex}
+                        size={FONTSIZE.size_10}
+                    />
+                </TouchableOpacity>
+                <View style={styles.CartItemQuantityContainer}>
+                    <Text style={styles.CartItemQuantityText}>
+                        {prices[0].quantity}
+                    </Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.CartItemIcon}
+                    onPress={() => {
+                        incrementCartItemQuantityHandler(id, prices[0].size);
+                    }}
+                >
+                    <CustomIcon
+                        name="add"
+                        color={COLORS.primaryWhiteHex}
+                        size={FONTSIZE.size_10}
+                    />
+                </TouchableOpacity>
+            </View>
                 </View>
             </View>
         </LinearGradient>
@@ -244,8 +281,21 @@ const styles = StyleSheet.create({
     width: 150,
     borderRadius: BORDERRADIUS.radius_20,
   },
-  CartItemSingleInfoContainer: {},
-  CartItemSingleSizeValueContainer: {},
+  CartItemSingleInfoContainer: {
+    flex: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'space-around',
+  },
+  CartItemSingleSizeValueContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  CartItemSingleQuantityContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
 });
 
 export default CartItem;
