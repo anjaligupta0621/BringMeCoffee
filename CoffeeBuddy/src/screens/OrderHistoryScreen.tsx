@@ -1,26 +1,40 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { useStore } from '../store/store';
-import { COLORS, SPACING } from '../theme/theme';
+import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/theme';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import HeaderBar from '../components/HeaderBar';
 import EmptyListAnimation from '../components/EmptyListAnimation';
 import PopUpAnimation from '../components/PopUpAnimation';
 import OrderHistoryCard from '../components/OrderHistoryCard';
 
-const OrderHistoryScreen = () => {
+const OrderHistoryScreen = ({navigation}: any) => {
 
     const [showAnimation, setShowAnimation] = useState(false);
 
     const OrderHistoryList = useStore((state: any) => state.OrderHistoryList);
     const tabBarHeight = useBottomTabBarHeight();
-    console.log(OrderHistoryList.length);
+
+    const navigationHandler = ({ index, id, type }: any) => {
+        navigation.push('Details', {
+            index,
+            id,
+            type,
+        });
+    };
+
+    const buttonPressHandler = () => {
+        setShowAnimation(true);
+        setTimeout(() => {
+            setShowAnimation(false);
+        }, 2000);
+    };
 
     return (
         <View style={styles.ScreenContainer}>
             <StatusBar backgroundColor={COLORS.primaryBlackHex} />
-            { showAnimation ? <PopUpAnimation style={styles.LottieAnimation} source={require('../lottie/successful.json')} /> : <></> }
+            { showAnimation ? <PopUpAnimation style={styles.LottieAnimation} source={require('../lottie/download.json')} /> : <></> }
 
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -40,12 +54,20 @@ const OrderHistoryScreen = () => {
                                         key={index.toString()}
                                         CartList={data.CartList}
                                         CartListPrice={data.CartListPrice}
-                                        navigationHandler={() => {}}
+                                        navigationHandler={navigationHandler}
                                         OrderDate={data.OrderDate}
                                     />
                                 ))}
                             </View>)}
                     </View>
+                    {OrderHistoryList.length > 0 ? <TouchableOpacity
+                        style={styles.DownloadButton}
+                        onPress={() => {
+                            buttonPressHandler();
+                        }}
+                    >
+                        <Text style={styles.ButtonText}>Download</Text>
+                    </TouchableOpacity> : <></>}
                 </View>
             </ScrollView>
         </View>
@@ -73,6 +95,19 @@ const styles = StyleSheet.create({
     ListItemContainer: {
         paddingHorizontal: SPACING.space_20,
         gap: SPACING.space_30,
+    },
+    DownloadButton: {
+        margin: SPACING.space_20,
+        backgroundColor: COLORS.primaryOrangeHex,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: SPACING.space_36 * 2,
+        borderRadius: BORDERRADIUS.radius_20,
+    },
+    ButtonText: {
+        fontFamily: FONTFAMILY.poppins_semibold,
+        fontSize: FONTSIZE.size_18,
+        color: COLORS.primaryWhiteHex,
     },
 });
 
