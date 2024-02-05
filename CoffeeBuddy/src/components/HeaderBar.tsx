@@ -26,6 +26,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({ title }) => {
 
 const styles = StyleSheet.create({
     HeaderContainer: {
+        marginTop: SPACING.space_30,
         padding: SPACING.space_30,
         flexDirection: 'row',
         alignItems: 'center',
