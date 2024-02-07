@@ -8,7 +8,7 @@ import { COLORS, SPACING } from '../theme/theme';
 const ProfilePic = () => {
     return (
         <View style={styles.ImageContainer}>
-            <Image source={require('../assets/app_images/avatar.png')} style={styles.Image} />
+            <Image source={require('../assets/app_images/pheeb.jpeg')} style={styles.Image} />
         </View>
     );
 };
